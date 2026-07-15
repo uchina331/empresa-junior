@@ -215,20 +215,28 @@ gap:30px;
 }
 
 .membro{
-
-background:white;
-border-radius:15px;
-overflow:hidden;
-text-align:center;
-
+    background:white;
+    width:220px;
+    border-radius:15px;
+    overflow:hidden;
+}
+.membro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .membro img{
-
-width:100%;
-height:260px;
-object-fit:cover;
-
+    width: 100%;
+}
+.membro img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+.ajuste-vitor{
+    object-position:center 15%;
 }
 
 .membro h3{
@@ -291,7 +299,63 @@ text-align:center;
 padding:30px;
 
 }
+@media (max-width:768px){
 
+header{
+    flex-direction:column;
+    padding:15px;
+}
+
+.logo{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+nav a{
+    margin:0;
+    font-size:15px;
+}
+
+.banner h1{
+    font-size:42px;
+}
+
+.banner p{
+    font-size:17px;
+}
+
+section{
+    padding:80px 20px;
+}
+
+.contato{
+    grid-template-columns:1fr;
+}
+
+.membros{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.membro{
+    width:90%;
+    max-width:320px;
+}
+
+iframe{
+    width:100%;
+    height:300px;
+}
+
+}
 </style>
 </head>
 
@@ -305,17 +369,19 @@ Empresa Júnior
 
 <nav>
 
-<a href="#">Início</a>
-<a href="#">Sobre</a>
-<a href="#">Serviços</a>
-<a href="#">Equipe</a>
-<a href="#">Contato</a>
+
+<a href="#inicio">Início</a>
+<a href="#sobre">Sobre</a>
+<a href="#servicos">Serviços</a>
+<a href="#equipe">Equipe</a>
+<a href="#contato">Contato</a>
+
 
 </nav>
 
 </header>
 
-<section class="banner">
+<section class="banner" id="inicio">
 
 <div>
 
@@ -331,7 +397,7 @@ Desenvolvida pelos alunos do Curso Técnico em Administração do CETEP de Medei
 
 </section>
 
-<section>
+<section id="sobre">
 
 <h1 class="titulo">Quem Somos</h1>
 
@@ -382,7 +448,7 @@ Missão • Visão • Valores
 
 </section>
 
-<section>
+<section id="servicos">
 
 <h1 class="titulo">Nossos Serviços</h1>
 
@@ -412,7 +478,7 @@ Missão • Visão • Valores
 
 </section>
 
-<section class="equipe">
+<section class="equipe" id="equipe">
 
 <h1 class="titulo">
 Nossa Equipe
@@ -443,14 +509,14 @@ Nossa Equipe
 <p>Diretor de Marketing</p>
 </div>
 <div class="membro">
-<img src="bia.png.jpeg" alt="Enzo">
+<img src="bea.png.jpeg" alt="Enzo">
 <h3>Beatriz Rodrigues</h3>
 <p>Diretora Operacional </p>
 </div>
 <div class="membro">
 <img src="felipe.png.jpeg" alt="Enzo">
 <h3>Felipe Lima</h3>
-<p>TI</p>
+<p>Diretor de Relações Publicas</p>
 </div>
 <div class="membro">
 <img src="maisa.png.jpeg" alt="Enzo">
@@ -463,9 +529,9 @@ Nossa Equipe
 <p>Secretaria geral</p>
 </div>
 <div class="membro">
-<img src="vitor.png.jpeg" alt="Enzo">
-<h3>Vitor manuel</h3>
-<p>Tesoureiro</p>
+    <img src="vitor.png.jpeg" class="ajuste-vitor" alt="Vitor">
+    <h3>Vitor Manuel</h3>
+    <p>Tesoureiro</p>
 </div>
 <div class="membro">
 <img src="ju.png.jpeg" alt="Enzo">
@@ -485,17 +551,24 @@ Professores Orientadores
 </h1>
 
 <div class="membros">
+
     <div class="membro">
-<img src="eden.png" alt="Enzo">
-<h3>Eden Brito</h3>
-<p>Professor</p>
+        <img src="eden.png" alt="Eden">
+        <h3>Eden Brito</h3>
+        <p>Professor</p>
+    </div>
+
+    <div class="membro">
+        <img src="grecy.png" alt="Gracylene">
+        <h3>Gracylene</h3>
+        <p>Professora</p>
+    </div>
+
 </div>
-<div class="membro">
-<img src="grecy.png" alt="Enzo">
-<h3>Gracylene</h3>
-<p>Professora</p>
-</div>
-    </section> 
+
+</section>
+<section id="contato">
+
 <h1 class="titulo">
 Entre em Contato
 </h1>
@@ -524,8 +597,7 @@ Entre em Contato
 
 <br>
 
-<p>📍 Centro Territorial de Educação Profissional em Medeiros Neto (CETEP)</p>
-
+<p>📍Avenida Araci Alves Pinto, 435 - Uldurico Pinto, Medeiros Neto - BA, CEP: 45960-000</p>
 <br>
 
 <p>📞 (73) 99941-0285</p>
@@ -541,7 +613,17 @@ Entre em Contato
 </div>
 
 </div>
+<br><br>
 
+<iframe
+    src="https://maps.google.com/maps?q=Avenida%20Araci%20Alves%20Pinto%20435%20Medeiros%20Neto%20BA&t=&z=17&ie=UTF8&iwloc=&output=embed"
+    width="100%"
+    height="350"
+    style="border:0;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.2);"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+</iframe>
 </section>
 
 <footer>
