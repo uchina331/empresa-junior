@@ -6,7 +6,7 @@
 <title>Empresa Júnior</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <style>
 
 *{
@@ -437,13 +437,65 @@ Nossa Equipe
 <h3>Enzo Moreira</h3>
 <p>TI</p>
 </div>
+<div class="membro">
+<img src="arthur.png.jpeg" alt="Enzo">
+<h3>Arthur Machado</h3>
+<p>Diretor de Marketing</p>
+</div>
+<div class="membro">
+<img src="bia.png.jpeg" alt="Enzo">
+<h3>Beatriz Rodrigues</h3>
+<p>Diretora Operacional </p>
+</div>
+<div class="membro">
+<img src="felipe.png.jpeg" alt="Enzo">
+<h3>Felipe Lima</h3>
+<p>TI</p>
+</div>
+<div class="membro">
+<img src="maisa.png.jpeg" alt="Enzo">
+<h3>Maysa do santos</h3>
+<p>Diretora Administrativa</p>
+</div>
+<div class="membro">
+<img src="raissa.png.jpeg" alt="Enzo">
+<h3>Raissa Rinara</h3>
+<p>Secretaria geral</p>
+</div>
+<div class="membro">
+<img src="vitor.png.jpeg" alt="Enzo">
+<h3>Vitor manuel</h3>
+<p>Tesoureiro</p>
+</div>
+<div class="membro">
+<img src="ju.png.jpeg" alt="Enzo">
+<h3>Ana Julia</h3>
+<p>Diretora De RH</p>
+</div>
 
 </div>
 
-</section>
+</section> 
 
-<section>
 
+<section class="equipe">
+
+<h1 class="titulo">
+Professores Orientadores
+</h1>
+
+<div class="membros">
+    <div class="membro">
+<img src="eden.png" alt="Enzo">
+<h3>Eden Brito</h3>
+<p>Professor</p>
+</div>
+<div class="membro">
+<img src="grecy.png" alt="Enzo">
+<h3>Gracylene</h3>
+<p>Professora</p>
+</div>
+    </section> 
 <h1 class="titulo">
 Entre em Contato
 </h1>
@@ -496,6 +548,71 @@ Entre em Contato
 
 © 2026 Empresa Júnior • Todos os direitos são reservados
 </footer>
+<!-- BOTÃO WHATSAPP -->
+<a href="https://wa.me/557399670438?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Empresa%20Júnior."
+class="whatsapp-btn"
+target="_blank">
 
+<i class="fab fa-whatsapp"></i>
+<span>Fale Conosco</span>
+
+</a>
+
+<style>
+
+.whatsapp-btn{
+position:fixed;
+bottom:25px;
+right:25px;
+display:flex;
+align-items:center;
+gap:12px;
+padding:15px 22px;
+background:linear-gradient(135deg,#25D366,#128C7E);
+color:#fff;
+text-decoration:none;
+border-radius:50px;
+font-weight:600;
+font-size:17px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:9999;
+transition:.3s;
+animation:pulse 2s infinite;
+}
+
+.whatsapp-btn i{
+font-size:30px;
+}
+
+.whatsapp-btn:hover{
+transform:scale(1.08);
+}
+
+@keyframes pulse{
+0%{
+box-shadow:0 0 0 0 rgba(37,211,102,.6);
+}
+70%{
+box-shadow:0 0 0 18px rgba(37,211,102,0);
+}
+100%{
+box-shadow:0 0 0 0 rgba(37,211,102,0);
+}
+}
+
+@media(max-width:768px){
+
+.whatsapp-btn span{
+display:none;
+}
+
+.whatsapp-btn{
+padding:16px;
+border-radius:50%;
+}
+
+}
+
+</style>
 </body>
 </html> 
