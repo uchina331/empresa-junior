@@ -235,7 +235,197 @@ margin-top:40px;
 
 <div style="text-align:center;margin:25px 0;">
 
-<button onclick="abrirFormulario()" class="btn-publicar">
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { 
+getFirestore,
+collection,
+addDoc,
+getDocs,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBs1WWlYtYGC18f6QyNJ2h4L-2d9xaHH3g",
+
+authDomain: "empresa-junior-cetep.firebaseapp.com",
+
+projectId: "empresa-junior-cetep",
+
+storageBucket: "empresa-junior-cetep.firebasestorage.app",
+
+messagingSenderId: "62973063152",
+
+appId: "1:62973063152:web:bcea0e3d97d616fccf7735"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+window.abrirFormulario = function(){
+
+const formulario = document.getElementById("formulario");
+
+
+if(formulario.style.display === "block"){
+
+formulario.style.display = "none";
+
+}else{
+
+formulario.style.display = "block";
+
+}
+
+}
+
+
+
+
+window.publicarNoticia = async function(){
+
+
+const titulo = document.getElementById("titulo").value;
+
+const texto = document.getElementById("texto").value;
+
+
+
+if(titulo.trim()==="" || texto.trim()===""){
+
+alert("Preencha título e notícia!");
+
+return;
+
+}
+
+
+
+try{
+
+
+await addDoc(collection(db,"noticias"),{
+
+titulo: titulo,
+
+texto: texto,
+
+imagem:"sem-imagem",
+
+data: serverTimestamp()
+
+});
+
+
+
+alert("Notícia salva no Firebase!");
+
+
+
+document.getElementById("titulo").value="";
+
+document.getElementById("texto").value="";
+
+
+document.getElementById("formulario").style.display="none";
+
+
+
+carregarNoticias();
+
+
+
+}catch(error){
+
+console.log(error);
+
+alert("Erro ao salvar notícia");
+
+}
+
+
+}
+
+
+
+
+async function carregarNoticias(){
+
+
+const lista = document.getElementById("listaNoticias");
+
+
+lista.innerHTML="";
+
+
+const consulta = await getDocs(collection(db,"noticias"));
+
+
+
+consulta.forEach((doc)=>{
+
+
+const noticia = doc.data();
+
+
+
+const card = document.createElement("div");
+
+card.className="card";
+
+
+card.innerHTML=`
+
+<div class="conteudo">
+
+<span class="categoria">
+Notícia
+</span>
+
+
+<h2>
+${noticia.titulo}
+</h2>
+
+
+<p class="texto">
+${noticia.texto}
+</p>
+
+
+</div>
+
+`;
+
+
+
+lista.appendChild(card);
+
+
+
+});
+
+
+}
+
+
+
+carregarNoticias();
+
+
+</script>
+<div style="text-align:center;margin:25px 0;">
+
+<button onclick="abrirFormulario()">
 ➕ Adicionar Notícia
 </button>
 
@@ -244,23 +434,35 @@ margin-top:40px;
 
 <div id="formulario" style="display:none; max-width:700px; margin:20px auto; background:#fff; padding:20px; border-radius:10px;">
 
-<input type="text" id="titulo" placeholder="Título da notícia" style="width:100%;padding:10px;">
+<input 
+type="text" 
+id="titulo" 
+placeholder="Título da notícia"
+style="width:100%;padding:10px;"
+>
 
 <br><br>
 
-<textarea id="texto" rows="6" placeholder="Escreva a notícia..." style="width:100%;padding:10px;"></textarea>
+
+<textarea 
+id="texto"
+rows="6"
+placeholder="Escreva a notícia..."
+style="width:100%;padding:10px;"
+></textarea>
+
 
 <br><br>
 
-<input type="file" id="imagem">
+<input type="file" id="imagem" accept="image/*">
 
-<br><br>
 
-<button onclick="publicarNoticia()">Publicar</button>
+<button onclick="publicarNoticia()">
+Publicar
+</button>
+
 
 </div>
-
-
 <div id="listaNoticias" class="container"></div>
 
 
@@ -269,136 +471,6 @@ margin-top:40px;
 Empresa Júnior © 2026
 
 </footer>
-<script>
-
-function abrirFormulario(){
-
-    const formulario = document.getElementById("formulario");
-
-    if(formulario.style.display === "block"){
-        formulario.style.display = "none";
-    }else{
-        formulario.style.display = "block";
-    }
-
-}
-
-
-
-function publicarNoticia(){
-
-    const titulo = document.getElementById("titulo");
-    const texto = document.getElementById("texto");
-    const imagem = document.getElementById("imagem");
-    const lista = document.getElementById("listaNoticias");
-
-
-    if(titulo.value.trim() === "" || texto.value.trim() === ""){
-
-        alert("Preencha o título e a notícia!");
-
-        return;
-
-    }
-
-
-    const data = new Date().toLocaleDateString("pt-BR");
-
-
-    function criarCard(imagemSrc){
-
-
-        const card = document.createElement("div");
-
-        card.className = "card";
-
-
-        card.innerHTML = `
-
-            <img src="${imagemSrc}" alt="Imagem da notícia">
-
-
-            <div class="conteudo">
-
-                <span class="categoria">
-                    Notícia
-                </span>
-
-
-                <h2>
-                    ${titulo.value}
-                </h2>
-
-
-                <div class="data">
-                    ${data}
-                </div>
-
-
-                <p class="texto">
-                    ${texto.value}
-                </p>
-
-
-            </div>
-
-        `;
-
-
-        lista.prepend(card);
-
-
-        // limpar campos
-
-        titulo.value = "";
-
-        texto.value = "";
-
-        imagem.value = "";
-
-
-        // fechar formulário
-
-        document.getElementById("formulario").style.display = "none";
-
-
-        alert("Notícia publicada com sucesso!");
-
-    }
-
-
-
-    // Verifica se colocou imagem
-
-    if(imagem.files.length > 0){
-
-
-        const reader = new FileReader();
-
-
-        reader.onload = function(e){
-
-            criarCard(e.target.result);
-
-        };
-
-
-        reader.readAsDataURL(imagem.files[0]);
-
-
-    }else{
-
-
-        criarCard("https://via.placeholder.com/600x350?text=Sem+Imagem");
-
-
-    }
-
-
-}
-
-
-</script>
 
 </body>
 </html>
