@@ -121,6 +121,7 @@ transform:scale(1.08);
 section{
 
 padding:100px 8%;
+scroll-margin-top:100px;
 
 }
 
@@ -421,8 +422,6 @@ A Empresa Júnior é uma organização formada pelos alunos do Curso Técnico em
 
 </section>
 
-<section id="sobre">
-
 <h1 class="titulo">
 Missão • Visão • Valores
 </h1>
@@ -499,7 +498,7 @@ Nossa Equipe
 </div>
 
 <div class="membro">
-<img src="en.png" alt="Enzo">
+<img src="enz.png" alt="Enzo">
 <h3>Enzo Moreira</h3>
 <p>TI</p>
 </div>
@@ -514,17 +513,17 @@ Nossa Equipe
 <p>Diretora Operacional </p>
 </div>
 <div class="membro">
-<img src="felipe.png.jpeg" alt="Enzo">
+<img src="felipe.png" alt="Enzo">
 <h3>Felipe Lima</h3>
 <p>Diretor de Relações Publicas</p>
 </div>
 <div class="membro">
-<img src="maisa.png.jpeg" alt="Enzo">
+<img src="maissa.png" alt="Enzo">
 <h3>Maysa do santos</h3>
 <p>Diretora Administrativa</p>
 </div>
 <div class="membro">
-<img src="raissa.png.jpeg" alt="Enzo">
+<img src="rai.png" alt="Enzo">
 <h3>Raissa Rinara</h3>
 <p>Secretaria geral</p>
 </div>
@@ -577,15 +576,21 @@ Entre em Contato
 
 <div>
 
-<form action="mailto:empresa.junior.cetep@gmail.com" method="post" enctype="text/plain">
+<form action="https://formsubmit.co/empresa.junior.cetep@gmail.com" method="POST">
 
-<input type="text" name="Nome" placeholder="Nome" required>
+    <input type="text" name="Nome" placeholder="Nome" required>
 
-<input type="email" name="Email" placeholder="E-mail" required>
+    <input type="email" name="Email" placeholder="E-mail" required>
 
-<textarea name="Mensagem" rows="6" placeholder="Mensagem" required></textarea>
+    <textarea name="Mensagem" rows="6" placeholder="Mensagem" required></textarea>
 
-<button type="submit">Enviar</button>
+    <!-- Desativa o captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Página para voltar após enviar -->
+    <input type="hidden" name="_next" value="https://empresa-junior.netlify.app">
+
+    <button type="submit">Enviar</button>
 
 </form>
 
@@ -604,7 +609,7 @@ Entre em Contato
 
 <br>
 
-<p>✉ empresa.junior.cetep@gmail.com</p>
+<p>✉ emprsa.junior.cetep@gmail.com</p>
 
 <br>
 
@@ -616,6 +621,7 @@ Entre em Contato
 <br><br>
 
 <iframe
+title="Localização da Empresa Júnior"
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.50862876505!2d-40.231092025646376!3d-17.38736176419213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x74abf0071f295e5%3A0xbd94541e4d905aeb!2sCentro%20Territorial%20de%20Educa%C3%A7%C3%A3o%20Profissional%20de%20Medeiros%20Neto!5e0!3m2!1spt-BR!2sbr!4v1784144753343!5m2!1spt-BR!2sbr"
     width="100%"
     height="350"
