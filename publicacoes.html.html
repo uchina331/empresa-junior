@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 .btn-voltar{
     display:inline-block;
     margin:25px;
@@ -27,6 +28,7 @@
     color:#021B4E;
     transform:translateY(-3px);
 }
+
 *{
 margin:0;
 padding:0;
@@ -38,7 +40,6 @@ body{
 background:#eef3f8;
 }
 
-/* TOPO */
 
 header{
 background:#002b5c;
@@ -56,7 +57,6 @@ margin-top:8px;
 opacity:.9;
 }
 
-/* PESQUISA */
 
 .barra{
 width:90%;
@@ -85,7 +85,6 @@ border-radius:8px;
 font-size:16px;
 }
 
-/* PUBLICAÇÕES */
 
 .container{
 
@@ -101,6 +100,7 @@ gap:25px;
 padding-bottom:50px;
 
 }
+
 
 .card{
 
@@ -127,11 +127,13 @@ object-fit:cover;
 
 }
 
+
 .conteudo{
 
 padding:20px;
 
 }
+
 
 .categoria{
 
@@ -148,6 +150,7 @@ margin-bottom:12px;
 
 }
 
+
 .conteudo h2{
 
 font-size:22px;
@@ -155,6 +158,7 @@ color:#002b5c;
 margin-bottom:10px;
 
 }
+
 
 .data{
 
@@ -164,6 +168,7 @@ margin-bottom:15px;
 
 }
 
+
 .texto{
 
 line-height:1.7;
@@ -171,6 +176,7 @@ color:#555;
 margin-bottom:20px;
 
 }
+
 
 button{
 
@@ -188,13 +194,13 @@ transition:.3s;
 
 }
 
+
 button:hover{
 
 background:#003f82;
 
 }
 
-/* RODAPÉ */
 
 footer{
 
@@ -215,174 +221,185 @@ margin-top:40px;
 <body>
 
 <header>
+
 <a href="index.html" class="btn-voltar">
-    ⬅ Voltar ao Site Principal
+⬅ Voltar ao Site Principal
 </a>
+
 <h1>📰 Publicações</h1>
 
 <p>Empresa Júnior - CETEP Medeiros Neto</p>
 
 </header>
 
-<div class="barra">
 
-<input type="text" id="pesquisa" placeholder="Pesquisar publicação...">
+<div style="text-align:center;margin:25px 0;">
 
-<select id="categoria">
-
-<option value="todos">Todas</option>
-<option value="Projetos">Projetos</option>
-<option value="Eventos">Eventos</option>
-<option value="Cursos">Cursos</option>
-<option value="Avisos">Avisos</option>
-
-</select>
+<button onclick="abrirFormulario()" class="btn-publicar">
+➕ Adicionar Notícia
+</button>
 
 </div>
 
-<div class="container" id="lista">
 
-<div class="card" data-cat="Projetos">
+<div id="formulario" style="display:none; max-width:700px; margin:20px auto; background:#fff; padding:20px; border-radius:10px;">
 
-<img src="https://picsum.photos/600/400?1">
+<input type="text" id="titulo" placeholder="Título da notícia" style="width:100%;padding:10px;">
 
-<div class="conteudo">
+<br><br>
 
-<span class="categoria">Projetos</span>
+<textarea id="texto" rows="6" placeholder="Escreva a notícia..." style="width:100%;padding:10px;"></textarea>
 
-<h2>Consultoria Empresarial</h2>
+<br><br>
 
-<div class="data">15/07/2026</div>
+<input type="file" id="imagem">
 
-<p class="texto">
+<br><br>
 
-Nossa Empresa Júnior iniciou um novo projeto de consultoria para empresas da região.
-
-</p>
-
-<button>Ler Mais</button>
+<button onclick="publicarNoticia()">Publicar</button>
 
 </div>
 
-</div>
 
-<div class="card" data-cat="Eventos">
+<div id="listaNoticias" class="container"></div>
 
-<img src="https://picsum.photos/600/400?2">
-
-<div class="conteudo">
-
-<span class="categoria">Evento</span>
-
-<h2>Palestra sobre Empreendedorismo</h2>
-
-<div class="data">12/07/2026</div>
-
-<p class="texto">
-
-Venha participar da palestra gratuita com especialistas do mercado.
-
-</p>
-
-<button>Ler Mais</button>
-
-</div>
-
-</div>
-
-<div class="card" data-cat="Cursos">
-
-<img src="https://picsum.photos/600/400?3">
-
-<div class="conteudo">
-
-<span class="categoria">Curso</span>
-
-<h2>Curso de Marketing Digital</h2>
-
-<div class="data">10/07/2026</div>
-
-<p class="texto">
-
-Inscrições abertas para nosso curso de Marketing Digital.
-
-</p>
-
-<button>Ler Mais</button>
-
-</div>
-
-</div>
-
-<div class="card" data-cat="Avisos">
-
-<img src="https://picsum.photos/600/400?4">
-
-<div class="conteudo">
-
-<span class="categoria">Aviso</span>
-
-<h2>Reunião Geral</h2>
-
-<div class="data">08/07/2026</div>
-
-<p class="texto">
-
-A reunião acontecerá na próxima sexta-feira às 19h.
-
-</p>
-
-<button>Ler Mais</button>
-
-</div>
-
-</div>
-
-</div>
 
 <footer>
 
 Empresa Júnior © 2026
 
 </footer>
-
 <script>
 
-const pesquisa=document.getElementById("pesquisa");
+function abrirFormulario(){
 
-const categoria=document.getElementById("categoria");
+    const formulario = document.getElementById("formulario");
 
-const cards=document.querySelectorAll(".card");
-
-function filtrar(){
-
-const texto=pesquisa.value.toLowerCase();
-
-const cat=categoria.value;
-
-cards.forEach(card=>{
-
-const titulo=card.querySelector("h2").textContent.toLowerCase();
-
-const conteudo=card.querySelector(".texto").textContent.toLowerCase();
-
-const categoriaCard=card.dataset.cat;
-
-const pesquisaOK=titulo.includes(texto)||conteudo.includes(texto);
-
-const categoriaOK=(cat==="todos")||(cat===categoriaCard);
-
-card.style.display=(pesquisaOK&&categoriaOK)?"block":"none";
-
-});
+    if(formulario.style.display === "block"){
+        formulario.style.display = "none";
+    }else{
+        formulario.style.display = "block";
+    }
 
 }
 
-pesquisa.addEventListener("keyup",filtrar);
 
-categoria.addEventListener("change",filtrar);
+
+function publicarNoticia(){
+
+    const titulo = document.getElementById("titulo");
+    const texto = document.getElementById("texto");
+    const imagem = document.getElementById("imagem");
+    const lista = document.getElementById("listaNoticias");
+
+
+    if(titulo.value.trim() === "" || texto.value.trim() === ""){
+
+        alert("Preencha o título e a notícia!");
+
+        return;
+
+    }
+
+
+    const data = new Date().toLocaleDateString("pt-BR");
+
+
+    function criarCard(imagemSrc){
+
+
+        const card = document.createElement("div");
+
+        card.className = "card";
+
+
+        card.innerHTML = `
+
+            <img src="${imagemSrc}" alt="Imagem da notícia">
+
+
+            <div class="conteudo">
+
+                <span class="categoria">
+                    Notícia
+                </span>
+
+
+                <h2>
+                    ${titulo.value}
+                </h2>
+
+
+                <div class="data">
+                    ${data}
+                </div>
+
+
+                <p class="texto">
+                    ${texto.value}
+                </p>
+
+
+            </div>
+
+        `;
+
+
+        lista.prepend(card);
+
+
+        // limpar campos
+
+        titulo.value = "";
+
+        texto.value = "";
+
+        imagem.value = "";
+
+
+        // fechar formulário
+
+        document.getElementById("formulario").style.display = "none";
+
+
+        alert("Notícia publicada com sucesso!");
+
+    }
+
+
+
+    // Verifica se colocou imagem
+
+    if(imagem.files.length > 0){
+
+
+        const reader = new FileReader();
+
+
+        reader.onload = function(e){
+
+            criarCard(e.target.result);
+
+        };
+
+
+        reader.readAsDataURL(imagem.files[0]);
+
+
+    }else{
+
+
+        criarCard("https://via.placeholder.com/600x350?text=Sem+Imagem");
+
+
+    }
+
+
+}
+
 
 </script>
 
 </body>
 </html>
+
