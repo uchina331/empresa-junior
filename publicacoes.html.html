@@ -229,7 +229,15 @@ margin-top:40px;
 <h1>📰 Publicações</h1>
 
 <p>Empresa Júnior - CETEP Medeiros Neto</p>
+<div style="position:absolute;top:20px;right:20px;">
+    <button id="btnLogin" onclick="abrirLogin()">
+        🔐 Login Admin
+    </button>
 
+    <button id="btnSair" onclick="logout()" style="display:none;">
+        🚪 Sair
+    </button>
+</div>
 </header>
 
 
@@ -237,15 +245,25 @@ margin-top:40px;
 
 <script type="module">
 
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { 
-getFirestore,
-collection,
-addDoc,
-getDocs,
-serverTimestamp
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -268,8 +286,73 @@ appId: "1:62973063152:web:bcea0e3d97d616fccf7735"
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+const auth = getAuth(app);
 
+window.abrirLogin = function () {
+    document.getElementById("loginAdmin").style.display = "flex";
+}
 
+window.fecharLogin = function () {
+    document.getElementById("loginAdmin").style.display = "none";
+}
+
+window.loginAdmin = async function () {
+
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    try {
+
+        await signInWithEmailAndPassword(auth, email, senha);
+
+        alert("Login realizado com sucesso!");
+
+        fecharLogin();
+
+    } catch (e) {
+
+        alert("E-mail ou senha incorretos.");
+
+    }
+
+}
+
+window.logout = async function () {
+
+    await signOut(auth);
+
+}
+
+onAuthStateChanged(auth, (user) => {
+
+    const btnLogin = document.getElementById("btnLogin");
+    const btnSair = document.getElementById("btnSair");
+
+    if(user){
+
+        btnLogin.style.display = "none";
+        btnSair.style.display = "inline-block";
+
+       document.getElementById("btnAdicionar").style.display = "inline-block";
+
+        document.querySelectorAll("[data-admin]").forEach(botao=>{
+            botao.style.display = "inline-block";
+        });
+
+    }else{
+
+        btnLogin.style.display = "inline-block";
+        btnSair.style.display = "none";
+
+       document.getElementById("btnAdicionar").style.display = "none";
+
+        document.querySelectorAll("[data-admin]").forEach(botao=>{
+            botao.style.display = "none";
+        });
+
+    }
+
+});
 
 window.abrirFormulario = function(){
 
@@ -289,7 +372,25 @@ formulario.style.display = "block";
 }
 
 
+async function enviarImagemCloudinary(arquivo){
 
+    const formData = new FormData();
+
+    formData.append("file", arquivo);
+    formData.append("upload_preset", "empresa-junior");
+
+    const resposta = await fetch(
+        "https://api.cloudinary.com/v1_1/akly4e4z/image/upload",
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    const dados = await resposta.json();
+
+    return dados.secure_url;
+}
 
 window.publicarNoticia = async function(){
 
@@ -298,6 +399,7 @@ const titulo = document.getElementById("titulo").value;
 
 const texto = document.getElementById("texto").value;
 
+const imagem = document.getElementById("imagem");
 
 
 if(titulo.trim()==="" || texto.trim()===""){
@@ -312,16 +414,20 @@ return;
 
 try{
 
+let imagemURL = "sem-imagem";
+
+if(imagem.files.length > 0){
+
+    imagemURL = await enviarImagemCloudinary(imagem.files[0]);
+
+}
 
 await addDoc(collection(db,"noticias"),{
 
-titulo: titulo,
-
-texto: texto,
-
-imagem:"sem-imagem",
-
-data: serverTimestamp()
+    titulo: titulo,
+    texto: texto,
+    imagem: imagemURL,
+    data: serverTimestamp()
 
 });
 
@@ -336,9 +442,8 @@ document.getElementById("titulo").value="";
 document.getElementById("texto").value="";
 
 
-document.getElementById("formulario").style.display="none";
 
-
+document.getElementById("formulario").style.display = "none";
 
 carregarNoticias();
 
@@ -349,15 +454,14 @@ carregarNoticias();
 console.log(error);
 
 alert("Erro ao salvar notícia");
-
 }
-
-
 }
-
-
-
-
+window.apagarNoticia = async function(id){ const confirmar = confirm("Deseja apagar essa notícia?");if(confirmar){
+await deleteDoc(doc(db,"noticias",id));
+alert("Notícia apagada!");
+carregarNoticias();
+}
+}
 async function carregarNoticias(){
 
 
@@ -382,8 +486,18 @@ const card = document.createElement("div");
 
 card.className="card";
 
-
 card.innerHTML=`
+
+${noticia.imagem && noticia.imagem !== "sem-imagem" ? 
+`
+<img src="${noticia.imagem}" alt="Imagem da notícia">
+`
+:
+`
+<img src="https://via.placeholder.com/600x350?text=Sem+Imagem">
+`
+}
+
 
 <div class="conteudo">
 
@@ -402,11 +516,14 @@ ${noticia.texto}
 </p>
 
 
+<button data-admin style="display:none;" onclick="apagarNoticia('${doc.id}')">
+🗑️ Apagar
+</button>
+
+
 </div>
 
 `;
-
-
 
 lista.appendChild(card);
 
@@ -425,7 +542,10 @@ carregarNoticias();
 </script>
 <div style="text-align:center;margin:25px 0;">
 
-<button onclick="abrirFormulario()">
+<button
+onclick="abrirFormulario()"
+id="btnAdicionar"
+style="display:none;">
 ➕ Adicionar Notícia
 </button>
 
@@ -465,6 +585,52 @@ Publicar
 </div>
 <div id="listaNoticias" class="container"></div>
 
+<div id="loginAdmin" style="display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;">
+
+<div style="background:white;
+padding:30px;
+border-radius:15px;
+width:350px;">
+
+<h2>Administrador</h2>
+
+<br>
+
+<input
+id="email"
+type="email"
+placeholder="E-mail"
+style="width:100%;padding:10px;">
+
+<br><br>
+
+<input
+id="senha"
+type="password"
+placeholder="Senha"
+style="width:100%;padding:10px;">
+
+<br><br>
+
+<button onclick="loginAdmin()">
+Entrar
+</button>
+
+<button onclick="fecharLogin()">
+Cancelar
+</button>
+
+</div>
+
+</div>
 
 <footer>
 
