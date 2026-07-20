@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notícia | Empresa Júnior</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+.seta{
+
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    font-size:45px;
+
+    border:none;
+
+    background:rgba(255,255,255,.25);
+
+    color:white;
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+}
+
+.seta:hover{
+
+    background:white;
+
+    color:#002b5c;
+
+}
+
+.esquerda{
+
+    left:30px;
+
+}
+
+.direita{
+
+    right:30px;
+
+}
+
+/* ===== Modal da Galeria ===== */
+
+.modal{
+
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.95);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+
+}
+
+#imagemGrande{
+
+    max-width:90%;
+    max-height:90%;
+    border-radius:15px;
+
+}
+
+.fechar{
+
+    position:absolute;
+    top:20px;
+    right:35px;
+    font-size:45px;
+    color:white;
+    cursor:pointer;
+
+}
+
+#galeria{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+#galeria img{
+
+    width:100%;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+#galeria img:hover{
+
+    transform:scale(1.03);
+
+}
+
+#galeria video{
+
+    width:100%;
+    border-radius:10px;
+
+}
+
+#galeria a{
+
+    display:block;
+    background:#002b5c;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    text-decoration:none;
+    text-align:center;
+
+}
+
+#galeria a:hover{
+
+    background:#005bbb;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#eef3f8;
+}
+
+header{
+background:#002b5c;
+color:#fff;
+padding:30px;
+text-align:center;
+}
+
+.container{
+max-width:1100px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+#capa{
+width:100%;
+border-radius:15px;
+margin-bottom:25px;
+display:none;
+}
+
+#video{
+width:100%;
+border-radius:15px;
+margin-bottom:25px;
+display:none;
+}
+
+h1{
+color:#002b5c;
+margin-bottom:15px;
+}
+
+.info{
+color:#777;
+margin-bottom:20px;
+}
+
+#texto{
+line-height:1.8;
+font-size:18px;
+color:#444;
+white-space:pre-line;
+}
+
+.voltar{
+
+display:inline-block;
+margin-bottom:20px;
+
+padding:12px 20px;
+
+background:#002b5c;
+color:white;
+
+text-decoration:none;
+
+border-radius:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Empresa Júnior</h1>
+
+</header>
+
+<div class="container">
+
+<a href="./publicacoes.html" class="voltar">
+
+⬅ Voltar
+
+</a>
+
+<h1 id="titulo"></h1>
+
+<p class="info" id="data"></p>
+
+
+<img id="capa">
+
+<video controls id="video"></video>
+
+<div id="texto"></div>
+
+<hr style="margin:40px 0;">
+
+<h2>Galeria da Notícia</h2>
+
+<div id="galeria"></div>
+
+</div>
+
+<script type="module">
+
+let fotos=[];
+
+let fotoAtual=0;
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+getFirestore,
+
+doc,
+
+getDoc,
+
+updateDoc,
+
+increment
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBs1WWlYtYGC18f6QyNJ2h4L-2d9xaHH3g",
+
+authDomain: "empresa-junior-cetep.firebaseapp.com",
+
+projectId: "empresa-junior-cetep",
+
+storageBucket: "empresa-junior-cetep.firebasestorage.app",
+
+messagingSenderId: "62973063152",
+
+appId: "1:62973063152:web:bcea0e3d97d616fccf7735"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+const parametros=new URLSearchParams(location.search);
+
+const id=parametros.get("id");
+
+if(!id){
+    alert("Notícia não encontrada");
+    window.location.href="publicacoes.html";
+}
+
+const referencia=doc(db,"noticias",id);
+
+const documento=await getDoc(referencia);
+
+if(documento.exists()){
+
+const noticia=documento.data();
+
+document.getElementById("titulo").innerText=noticia.titulo;
+
+document.getElementById("texto").innerText=noticia.texto;
+
+
+if(noticia.data && noticia.data.toDate){
+
+    document.getElementById("data").innerText =
+    "Publicado em: " + noticia.data.toDate().toLocaleDateString("pt-BR");
+
+}else{
+
+    document.getElementById("data").innerText =
+    "Data não informada";
+
+}
+
+const galeria = document.getElementById("galeria");
+
+if(noticia.anexos){
+
+    noticia.anexos.forEach(anexo=>{
+
+   if(anexo.tipo.startsWith("image")){
+
+    fotos.push(anexo.url);
+
+    const indice=fotos.length-1;
+
+    galeria.innerHTML += `
+        <img
+        src="${anexo.url}"
+        onclick="abrirImagem(${indice})">
+    `;
+
+}
+
+        else if(anexo.tipo.startsWith("video")){
+
+            galeria.innerHTML += `
+                <video controls>
+                    <source src="${anexo.url}">
+                </video>
+            `;
+
+        }
+
+        else{
+
+            galeria.innerHTML += `
+                <a href="${anexo.url}" target="_blank">
+                    📄 ${anexo.nome}
+                </a>
+            `;
+
+        }
+
+    });
+
+}
+
+if(noticia.tipo=="image"){
+
+const img=document.getElementById("capa");
+
+img.src=noticia.arquivo;
+
+img.style.display="block";
+
+}
+
+document.getElementById("modalImagem").onclick=function(e){
+
+    if(e.target.id==="modalImagem"){
+
+        fecharImagem();
+
+    }
+
+}
+
+if(noticia.tipo=="video"){
+
+const video=document.getElementById("video");
+
+video.src=noticia.arquivo;
+
+video.style.display="block";
+
+}
+
+await updateDoc(referencia,{
+    visualizacoes: increment(1)
+});
+
+}
+
+
+window.abrirImagem=function(indice){
+
+    fotoAtual=indice;
+
+    document.getElementById("modalImagem").style.display="flex";
+
+    document.getElementById("imagemGrande").src=fotos[indice];
+
+}
+window.proximaImagem=function(event){
+
+    event.stopPropagation();
+
+    fotoAtual++;
+
+    if(fotoAtual>=fotos.length){
+
+        fotoAtual=0;
+
+    }
+
+    document.getElementById("imagemGrande").src=fotos[fotoAtual];
+
+}
+
+window.imagemAnterior=function(event){
+
+    event.stopPropagation();
+
+    fotoAtual--;
+
+    if(fotoAtual<0){
+
+        fotoAtual=fotos.length-1;
+
+    }
+
+    document.getElementById("imagemGrande").src=fotos[fotoAtual];
+
+}
+
+window.fecharImagem = function(){
+
+    document.getElementById("modalImagem").style.display="none";
+
+}
+</script>
+
+<div id="modalImagem" class="modal">
+
+    <span class="fechar" onclick="fecharImagem()">&times;</span>
+
+    <button class="seta esquerda" onclick="imagemAnterior(event)">❮</button>
+
+    <img id="imagemGrande">
+
+    <button class="seta direita" onclick="proximaImagem(event)">❯</button>
+
+</div>
+
+</body>
+</html>
