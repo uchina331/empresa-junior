@@ -418,7 +418,7 @@ Empresa Júnior
 <a href="#servicos">Serviços</a>
 <a href="#equipe">Equipe</a>
 <a href="#contato">Contato</a>
-<a href="publicacoes.html.html">📰 Publicações</a>
+<a href="publicacoes.html">📰 Publicações</a>
 
 </nav>
 
@@ -742,7 +742,7 @@ border-radius:50%;
 }
 
 </style>
-<script>
+<script type="module">
 
 let logado = false;
 
@@ -779,29 +779,8 @@ alert("Usuário ou senha incorretos");
 
 }
 
-
-const texto =
-document.getElementById("textoNoticia").value;
-
-const arquivo =
-document.getElementById("imagemNoticia").files[0];
-
-const leitor = new FileReader();
-
-leitor.onload = function(e){
-
-const imagem = e.target.result;
-
-const noticia = `
-<div class="noticia">
-
-<img src="${imagem}">
-
 async function publicarNoticia(){
 
-if(!logado){
-    return;
-}
 
 const titulo = document.getElementById("tituloNoticia").value;
 const texto = document.getElementById("textoNoticia").value;
