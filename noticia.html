@@ -3,6 +3,20 @@
 
 <head>
 
+<link rel="icon" href="logo.png">
+
+<meta name="description" content="Portal Oficial de Notícias da Empresa Júnior">
+
+<meta property="og:title" content="Empresa Júnior">
+
+<meta property="og:type" content="website">
+
+<meta property="og:image" content="logo.png">
+
+<meta property="og:description" content="Portal Oficial de Notícias">
+
+<meta name="theme-color" content="#002b5c">
+
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,35 +35,70 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#eef3f8;
+
+background:linear-gradient(180deg,#edf3fa,#f8fbff);
+
 color:#333;
+
+min-height:100vh;
+
+scroll-behavior:smooth;
+
+}
+header{
+    background:linear-gradient(135deg,#002b5c,#004d99);
+    color:white;
+    padding:45px 20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
 }
 
-header{
+header h2{
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-top:15px;
+}
 
-background:#002b5c;
-color:white;
-padding:25px;
-text-align:center;
-
+header p{
+    margin-top:8px;
+    opacity:.9;
+    font-size:16px;
 }
 
 .btn-voltar{
 
-display:inline-block;
-margin-bottom:20px;
-padding:12px 20px;
+display:inline-flex;
+align-items:center;
+gap:10px;
 
-background:white;
-color:#002b5c;
+padding:12px 22px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(10px);
+
+color:#fff;
+
+border:1px solid rgba(255,255,255,.25);
+
+border-radius:40px;
 
 text-decoration:none;
 
-border-radius:10px;
+font-weight:600;
 
-font-weight:bold;
+transition:.35s;
 
-transition:.3s;
+}
+
+.btn-voltar:hover{
+
+background:white;
+
+color:#002b5c;
+
+transform:translateY(-2px);
 
 }
 
@@ -61,27 +110,39 @@ background:#FFD54F;
 
 main{
 
-max-width:1000px;
+max-width:980px;
 
-margin:40px auto;
+margin:-35px auto 50px;
 
 background:white;
 
-padding:35px;
+padding:45px;
 
-border-radius:15px;
+border-radius:22px;
 
-box-shadow:0 10px 25px rgba(0,0,0,.15);
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.12),
+
+0 5px 12px rgba(0,0,0,.05);
+
+position:relative;
+
+z-index:10;
 
 }
 
 h1{
 
+font-size:46px;
+
 color:#002b5c;
 
-margin-bottom:15px;
+margin:20px 0;
 
-font-size:38px;
+line-height:1.2;
+
+font-weight:700;
 
 }
 
@@ -89,59 +150,77 @@ font-size:38px;
 
 display:inline-block;
 
+padding:8px 18px;
+
 background:#005bbb;
 
 color:white;
 
-padding:6px 15px;
-
 border-radius:30px;
 
-font-size:14px;
+font-size:13px;
 
-margin-bottom:15px;
+font-weight:600;
 
-}
+letter-spacing:.5px;
 
-#data{
+text-transform:uppercase;
 
-color:gray;
-
-margin-bottom:20px;
+box-shadow:0 6px 15px rgba(0,91,187,.25);
 
 }
 
+#data,
 #autor{
 
-font-weight:bold;
+font-size:15px;
 
-margin-bottom:30px;
+color:#777;
+
+margin:6px 0;
 
 }
 
 #capa{
 
+
 width:100%;
 
-border-radius:15px;
+border-radius:18px;
 
-margin-bottom:30px;
+max-height:550px;
 
 object-fit:cover;
 
-max-height:500px;
+margin:30px 0;
+
+box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+transition:.4s;
+
+}
+
+#capa:hover{
+
+transform:scale(1.01);
 
 }
 
 #texto{
 
-font-size:18px;
+font-size:19px;
 
-line-height:1.9;
+line-height:2;
+
+color:#444;
 
 white-space:pre-line;
 
-margin-bottom:40px;
+margin-top:20px;
+
+margin-bottom:45px;
+
+text-align:justify;
 
 }
 
@@ -149,11 +228,11 @@ margin-bottom:40px;
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 
-gap:20px;
+gap:22px;
 
-margin-top:30px;
+margin-top:35px;
 
 }
 
@@ -161,29 +240,323 @@ margin-top:30px;
 
 width:100%;
 
-border-radius:12px;
+height:220px;
+
+object-fit:cover;
+
+border-radius:18px;
 
 cursor:pointer;
 
-transition:.3s;
+transition:.35s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
 
 }
 
 .galeria img:hover{
 
-transform:scale(1.03);
+transform:translateY(-6px) scale(1.04);
+
+box-shadow:0 20px 40px rgba(0,0,0,.25);
 
 }
+
+
+
+
+
 
 .galeria video{
 
 width:100%;
 
-border-radius:12px;
+border-radius:18px;
+
+background:black;
+
+box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+transition:.3s;
+
+}
+
+.galeria video:hover{
+
+transform:translateY(-5px);
+
+}
+
+.topo-noticia{
+
+margin-bottom:35px;
+
+padding-bottom:25px;
+
+border-bottom:1px solid #e5e5e5;
+
+}
+
+.info-noticia{
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+margin-top:25px;
+
+}
+
+.info-card{
+
+flex:1;
+
+min-width:180px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:18px;
+
+background:#f8fbff;
+
+border:1px solid #e6eef8;
+
+border-radius:15px;
+
+transition:.3s;
+
+}
+
+.info-card:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 12px 25px rgba(0,0,0,.08);
+
+}
+
+.info-card span{
+
+font-size:28px;
+
+}
+
+.info-card strong{
+
+display:block;
+
+color:#002b5c;
+
+margin-bottom:4px;
+
+}
+
+.info-card p{
+
+color:#666;
+
+font-size:15px;
+
+}
+
+/* Barra de leitura */
+
+#progresso-leitura{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+height:5px;
+
+width:0;
+
+background:linear-gradient(90deg,#005bbb,#FFD54F);
+
+z-index:9999;
+
+transition:width .1s;
+
+}
+
+/* Entrada suave */
+
+main{
+
+animation:aparecer .7s ease;
+
+}
+
+@keyframes aparecer{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* Imagem principal */
+
+#capa{
+
+cursor:pointer;
+
+}
+
+#capa:hover{
+
+transform:scale(1.02);
+
+}
+
+/* Legenda */
+
+#legendaImagem{
+
+margin-top:-15px;
+
+margin-bottom:30px;
+
+text-align:center;
+
+font-size:14px;
+
+color:#777;
+
+font-style:italic;
+
+}
+
+/* Responsivo */
+
+@media(max-width:768px){
+
+h1{
+
+font-size:34px;
+
+}
+
+main{
+
+padding:25px;
+
+}
+
+.info-noticia{
+
+flex-direction:column;
+
+}
+
+}
+
+/* ==========================
+   LIGHTBOX
+========================== */
+
+#lightbox{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.92);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:99999;
+
+animation:fadeLightbox .3s;
+
+}
+
+@keyframes fadeLightbox{
+
+from{
+
+opacity:0;
+
+}
+
+to{
+
+opacity:1;
+
+}
+
+}
+
+#imagemLightbox{
+
+max-width:90%;
+
+max-height:90%;
+
+border-radius:15px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.5);
+
+}
+
+#fecharLightbox{
+
+position:absolute;
+
+top:20px;
+
+right:35px;
+
+font-size:45px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+user-select:none;
+
+}
+
+#fecharLightbox:hover{
+
+transform:scale(1.2);
+
+color:#FFD54F;
 
 }
 
 footer{
+
+margin-top:60px;
 
 background:#002b5c;
 
@@ -191,17 +564,524 @@ color:white;
 
 text-align:center;
 
-padding:25px;
+padding:35px;
+
+font-size:15px;
+
+letter-spacing:.5px;
+
+}
+
+#anterior,
+#proximo{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+background:rgba(255,255,255,.15);
+
+border:none;
+
+color:white;
+
+font-size:40px;
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+cursor:pointer;
+
+transition:.3s;
+
+backdrop-filter:blur(8px);
+
+}
+
+#anterior{
+
+left:30px;
+
+}
+
+#proximo{
+
+right:30px;
+
+}
+
+#anterior:hover,
+#proximo:hover{
+
+background:#FFD54F;
+
+color:#002b5c;
+
+}
+
+#contadorImagem{
+
+position:absolute;
+
+bottom:30px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+background:rgba(0,0,0,.5);
+
+padding:10px 20px;
+
+border-radius:30px;
+
+color:white;
+
+font-weight:bold;
+
+}
+
+.arquivo-card{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+padding:18px;
+
+margin-top:15px;
+
+background:#f8fbff;
+
+border:1px solid #dbe7f5;
+
+border-radius:15px;
+
+transition:.3s;
+
+text-decoration:none;
+
+color:#333;
+
+}
+
+.arquivo-card:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 12px 25px rgba(0,0,0,.10);
+
+background:white;
+
+}
+
+.arquivo-icone{
+
+font-size:34px;
+
+}
+
+.arquivo-info{
+
+flex:1;
+
+}
+
+.arquivo-info strong{
+
+display:block;
+
+color:#002b5c;
+
+margin-bottom:5px;
+
+}
+
+.arquivo-info span{
+
+font-size:14px;
+
+color:#777;
+
+}
+
+.titulo-galeria{
 
 margin-top:50px;
 
+margin-bottom:25px;
+
+color:#002b5c;
+
+font-size:28px;
+
+border-left:6px solid #FFD54F;
+
+padding-left:15px;
+
+font-weight:700;
+
 }
+
+.compartilhar{
+
+margin-top:60px;
+
+padding:30px;
+
+background:#f8fbff;
+
+border-radius:18px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.compartilhar h3{
+
+margin-bottom:20px;
+
+color:#002b5c;
+
+}
+
+.botoes-compartilhar{
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.botoes-compartilhar button{
+
+padding:12px 22px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+background:#005bbb;
+
+color:white;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.botoes-compartilhar button:hover{
+
+background:#003f80;
+
+transform:translateY(-3px);
+
+}
+
+.relacionadas{
+
+margin-top:70px;
+
+}
+
+#noticiasRelacionadas{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:20px;
+
+}
+
+.card-relacionada{
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+cursor:pointer;
+
+transition:.35s;
+
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+}
+
+.card-relacionada:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.card-relacionada:hover{
+
+transform:translateY(-6px);
+
+}
+
+.card-relacionada img{
+
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+}
+
+.card-relacionada .conteudo{
+
+padding:18px;
+
+}
+
+.card-relacionada h4{
+
+color:#002b5c;
+
+margin-bottom:10px;
+
+font-size:20px;
+
+}
+
+.card-relacionada p{
+
+color:#666;
+
+font-size:15px;
+
+}
+
+.card-relacionada img{
+
+transition:.4s;
+
+}
+
+.card-relacionada:hover img{
+
+transform:scale(1.06);
+
+}
+
+/* Botão voltar ao topo */
+
+#btnTopo{
+
+position:fixed;
+
+bottom:30px;
+
+right:30px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:#005bbb;
+
+color:white;
+
+font-size:22px;
+
+cursor:pointer;
+
+display:none;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+transition:.3s;
+
+z-index:999;
+
+}
+
+#btnTopo:hover{
+
+background:#003f80;
+
+transform:translateY(-5px);
+
+}
+
+/* Tempo de leitura */
+
+.tempo-leitura{
+
+margin-top:15px;
+
+display:inline-block;
+
+padding:8px 15px;
+
+background:#eef6ff;
+
+color:#005bbb;
+
+border-radius:30px;
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+#loader{
+
+position:fixed;
+
+inset:0;
+
+background:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999999;
+
+}
+
+.spinner{
+
+width:60px;
+
+height:60px;
+
+border:6px solid #ddd;
+
+border-top:6px solid #005bbb;
+
+border-radius:50%;
+
+animation:girar .8s linear infinite;
+
+}
+
+@keyframes girar{
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+@media(max-width:600px){
+
+main{
+
+padding:20px;
+
+}
+
+header h2{
+
+font-size:28px;
+
+}
+
+h1{
+
+text-wrap:balance;
+
+font-size:30px;
+
+}
+
+.info-card{
+
+min-width:100%;
+
+}
+
+.galeria{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+.card-relacionada,
+.arquivo-card,
+.info-card{
+
+transition:.35s;
+
+}
+
+.card-relacionada:hover,
+.arquivo-card:hover,
+.info-card:hover{
+
+transform:translateY(-6px);
+
+}
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#eef3fa;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#005bbb;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#003f80;
+
+}
+
 
 </style>
 
 </head>
 
 <body>
+
+<div id="loader">
+
+<div class="spinner"></div>
+
+</div>
+
+<div id="progresso-leitura"></div>
 
 <header>
 
@@ -217,32 +1097,95 @@ margin-top:50px;
 
 <main>
 
-<span id="categoria"></span>
+<div class="topo-noticia">
 
-<h1 id="titulo"></h1>
+    <span id="categoria"></span>
 
-<p id="data"></p>
+    <h1 id="titulo"></h1>
 
-<p id="autor"></p>
+    <p class="tempo-leitura" id="tempoLeitura"></p>
+
+    <div class="info-noticia">
+
+        <div class="info-card">
+            <span>📅</span>
+            <div>
+                <strong>Publicado</strong>
+                <p id="data"></p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <span>👤</span>
+            <div>
+                <strong>Autor</strong>
+                <p id="autor"></p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <span>👁️</span>
+            <div>
+                <strong>Visualizações</strong>
+                <p id="views">0</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 <img id="capa" style="display:none;">
+
+<p id="legendaImagem"></p>
 
 <div id="videoCapa"></div>
 
 <div id="texto"></div>
 
-<h2 style="margin-top:40px;color:#002b5c;">
-
-
+<h2 class="titulo-galeria">
+    Galeria de Fotos e Arquivos
 </h2>
 
 <div class="galeria" id="galeria"></div>
 
+<section class="compartilhar">
+
+<h3>Compartilhar esta notícia</h3>
+
+<div class="botoes-compartilhar">
+
+<button id="btnWhatsapp">📱 WhatsApp</button>
+
+<button id="btnFacebook">📘 Facebook</button>
+
+<button id="btnCopiar">🔗 Copiar Link</button>
+
+</div>
+
+</section>
+
+<section class="relacionadas">
+
+<h2>Outras Publicações</h2>
+
+<div id="noticiasRelacionadas"></div>
+
+</section>
+
 </main>
+
+<button id="btnTopo">⬆</button>
 
 <footer>
 
-Empresa Júnior © 2026
+<h3>Empresa Júnior</h3>
+
+<p>Curso Técnico em Administração</p>
+
+<p>CETEP de Medeiros Neto</p>
+
+<p>© 2026 Todos os direitos reservados.</p>
 
 </footer>
 <script type="module">
@@ -254,7 +1197,12 @@ getFirestore,
 doc,
 getDoc,
 updateDoc,
-increment
+increment,
+collection,
+query,
+orderBy,
+limit,
+getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -314,14 +1262,24 @@ document.getElementById("titulo").innerText = noticia.titulo;
 document.getElementById("categoria").innerText = noticia.categoria || "Notícia";
 
 document.getElementById("autor").innerText =
-"Autor: " + (noticia.autor || "Empresa Júnior");
+noticia.autor || "Empresa Júnior";
 
 document.getElementById("data").innerText =
-"Publicado em: " +
-(noticia.data?.toDate().toLocaleDateString("pt-BR") || "");
+noticia.data?.toDate().toLocaleDateString("pt-BR") || "";
+
+document.getElementById("views").innerText =
+(noticia.visualizacoes || 0) + 1;
 
 document.getElementById("texto").innerText =
 noticia.texto || "";
+
+const palavras = (noticia.texto || "").split(/\s+/).length;
+
+const minutos = Math.max(1, Math.ceil(palavras / 200));
+
+document.getElementById("tempoLeitura").innerText =
+`📖 ${minutos} min de leitura`;
+
 if(noticia.tipo === "image" && noticia.arquivo){
 
 const capa = document.getElementById("capa");
@@ -348,52 +1306,68 @@ document.getElementById("videoCapa").innerHTML = `
 
 const galeria = document.getElementById("galeria");
 
+let imagens=[];
+
+let indiceAtual=0;
+
 if(noticia.anexos){
 
 noticia.anexos.forEach((arquivo)=>{
 
 if(arquivo.tipo.startsWith("image")){
 
-galeria.innerHTML += `
+imagens.push(arquivo.url);
 
+}
+
+if(arquivo.tipo.startsWith("image")){
+
+galeria.innerHTML += `
 <img
 src="${arquivo.url}"
 alt="${arquivo.nome}"
-onclick="window.open('${arquivo.url}','_blank')">
-
+onclick="abrirImagem('${arquivo.url}')">
 `;
+window.abrirImagem = abrirImagem;
 
 }
 
-else if(arquivo.tipo.startsWith("video")){
 
-galeria.innerHTML += `
-
-<video controls>
-
-<source src="${arquivo.url}">
-
-</video>
-
-`;
-
-}
 
 else{
 
+let icone="📄";
+
+if(arquivo.nome.endsWith(".pdf")) icone="📕";
+
+else if(arquivo.nome.endsWith(".doc") || arquivo.nome.endsWith(".docx")) icone="📘";
+
+else if(arquivo.nome.endsWith(".xls") || arquivo.nome.endsWith(".xlsx")) icone="📗";
+
+else if(arquivo.nome.endsWith(".zip")) icone="🗜️";
+
 galeria.innerHTML += `
 
-<p>
-
 <a
+class="arquivo-card"
 href="${arquivo.url}"
 target="_blank">
 
-📄 ${arquivo.nome}
+<div class="arquivo-icone">
+
+${icone}
+
+</div>
+
+<div class="arquivo-info">
+
+<strong>${arquivo.nome}</strong>
+
+<span>Clique para abrir o arquivo</span>
+
+</div>
 
 </a>
-
-</p>
 
 `;
 
@@ -403,7 +1377,268 @@ target="_blank">
 
 }
 
+/* Barra de leitura */
+
+window.addEventListener("scroll",()=>{
+
+const altura=
+
+document.documentElement.scrollHeight-
+
+document.documentElement.clientHeight;
+
+const progresso=
+
+(window.scrollY/altura)*100;
+
+document.getElementById("progresso-leitura").style.width=
+
+progresso+"%";
+
+});
+
+/* Zoom da imagem */
+
+const capa=document.getElementById("capa");
+
+if(capa){
+
+capa.addEventListener("click",()=>{
+
+window.open(capa.src,"_blank");
+
+});
+
+}
+
+/* Legenda automática */
+
+if(noticia.arquivo){
+
+document.getElementById("legendaImagem").innerText=
+
+noticia.titulo;
+
+}
+
+function abrirImagem(url){
+
+indiceAtual = imagens.indexOf(url);
+
+atualizarLightbox();
+
+document.getElementById("lightbox").style.display="flex";
+
+}
+
+window.abrirImagem = abrirImagem;
+
+function atualizarLightbox(){
+
+document.getElementById("imagemLightbox").src=
+
+imagens[indiceAtual];
+
+document.getElementById("contadorImagem").innerText=
+
+`Imagem ${indiceAtual+1} de ${imagens.length}`;
+
+}
+
+document.getElementById("fecharLightbox").onclick=function(){
+
+document.getElementById("lightbox").style.display="none";
+
+};
+
+document.getElementById("lightbox").onclick=function(e){
+
+if(e.target.id==="lightbox"){
+
+this.style.display="none";
+
+}
+
+};
+
+document.getElementById("proximo").onclick=function(){
+
+indiceAtual++;
+
+if(indiceAtual>=imagens.length){
+
+indiceAtual=0;
+
+}
+
+atualizarLightbox();
+
+};
+
+document.getElementById("anterior").onclick=function(){
+
+indiceAtual--;
+
+if(indiceAtual<0){
+
+indiceAtual=imagens.length-1;
+
+}
+
+atualizarLightbox();
+
+};
+
+document.addEventListener("keydown",(e)=>{
+
+const aberto=
+
+document.getElementById("lightbox").style.display==="flex";
+
+if(!aberto) return;
+
+if(e.key==="ArrowRight"){
+
+document.getElementById("proximo").click();
+
+}
+
+if(e.key==="ArrowLeft"){
+
+document.getElementById("anterior").click();
+
+}
+
+if(e.key==="Escape"){
+
+document.getElementById("lightbox").style.display="none";
+
+}
+
+});
+
+const urlAtual=window.location.href;
+
+document.getElementById("btnCopiar").onclick=async()=>{
+
+await navigator.clipboard.writeText(urlAtual);
+
+alert("Link copiado!");
+
+};
+
+document.getElementById("btnWhatsapp").onclick=()=>{
+
+window.open(
+
+`https://wa.me/?text=${encodeURIComponent(urlAtual)}`,
+
+"_blank"
+
+);
+
+};
+
+document.getElementById("btnFacebook").onclick=()=>{
+
+window.open(
+
+`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlAtual)}`,
+
+"_blank"
+
+);
+};
+
+const listaRelacionadas =
+document.getElementById("noticiasRelacionadas");
+
+const consulta = query(
+collection(db,"noticias"),
+orderBy("data","desc"),
+limit(4)
+);
+
+const resultado = await getDocs(consulta);
+
+listaRelacionadas.innerHTML="";
+
+resultado.forEach((docSnap)=>{
+
+if(docSnap.id===id) return;
+
+const n = docSnap.data();
+
+listaRelacionadas.innerHTML += `
+
+<div class="card-relacionada"
+onclick="window.location='noticia.html?id=${docSnap.id}'">
+
+<img src="${
+n.tipo==="image"
+? n.arquivo
+: "https://placehold.co/600x400/002b5c/ffffff?text=Notícia"
+}">
+
+<div class="conteudo">
+
+<h4>${n.titulo}</h4>
+
+<p>${(n.texto||"").substring(0,90)}...</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+const btnTopo = document.getElementById("btnTopo");
+
+window.addEventListener("scroll",()=>{
+
+btnTopo.style.display =
+window.scrollY>400 ? "block" : "none";
+
+});
+
+btnTopo.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+setTimeout(() => {
+
+const loader = document.getElementById("loader");
+
+if(loader){
+    loader.style.display = "none";
+}
+
+}, 1000);
 </script>
+
+<div id="lightbox">
+
+    <span id="fecharLightbox">&times;</span>
+
+    <button id="anterior">&#10094;</button>
+
+    <img id="imagemLightbox">
+
+    <button id="proximo">&#10095;</button>
+
+    <div id="contadorImagem"></div>
+
+</div>
 
 </body>
 
