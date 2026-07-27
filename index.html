@@ -619,21 +619,35 @@ Entre em Contato
 
 <div>
 
-<form action="https://formsubmit.co/empresa.junior.cetep@gmail.com" method="POST">
+<form id="formContato">
 
-    <input type="text" name="Nome" placeholder="Nome" required>
+    <input
+        type="text"
+        id="nome"
+        placeholder="Nome"
+        required>
 
-    <input type="email" name="Email" placeholder="E-mail" required>
+    <input
+        type="email"
+        id="email"
+        placeholder="Seu E-mail"
+        required>
 
-    <textarea name="Mensagem" rows="6" placeholder="Mensagem" required></textarea>
+    <input
+        type="text"
+        id="assunto"
+        placeholder="Assunto"
+        required>
 
-    <!-- Desativa o captcha -->
-    <input type="hidden" name="_captcha" value="false">
+    <textarea
+        id="mensagem"
+        rows="6"
+        placeholder="Como podemos ajudar sua empresa?"
+        required></textarea>
 
-    <!-- Página para voltar após enviar -->
-    <input type="hidden" name="_next" value="https://empresa-junior.netlify.app">
-
-    <button type="submit">Enviar</button>
+    <button type="submit">
+        Enviar Mensagem
+    </button>
 
 </form>
 
@@ -678,7 +692,7 @@ title="Localização da Empresa Júnior"
 © 2026 Empresa Júnior • Todos os direitos são reservados
 </footer>
 <!-- BOTÃO WHATSAPP -->
-<a href="https://wa.me/557399670438?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Empresa%20Júnior."
+<a href="https://wa.me/557399670438?text=Olá!%20Gostaria%20de%20conhecer%20os%20serviços%20da%20Empresa%20Júnior%20e%20saber%20como%20vocês%20podem%20ajudar%20no%20crescimento%20e%20na%20gestão%20da%20minha%20empresa."
 class="whatsapp-btn"
 target="_blank">
 
@@ -743,7 +757,69 @@ border-radius:50%;
 }
 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script type="module">
+
+emailjs.init({
+    publicKey: "Q7S_UlJ1jUz4gWRWQ",
+});
+
+document
+.getElementById("formContato")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const botao =
+    this.querySelector("button");
+
+    botao.disabled = true;
+    botao.innerHTML = "Enviando...";
+
+ emailjs.send(
+    "service_7v6wnes",
+    "template_6wq444k",
+        {
+
+            nome:
+            document.getElementById("nome").value,
+
+            email:
+            document.getElementById("email").value,
+
+            assunto:
+            document.getElementById("assunto").value,
+
+            mensagem:
+            document.getElementById("mensagem").value
+
+        }
+
+    ).then(function(){
+
+        alert("✅ Mensagem enviada com sucesso!");
+
+        document
+        .getElementById("formContato")
+        .reset();
+
+    }).catch(function(error){
+
+        console.error(error);
+
+        alert("❌ Erro ao enviar a mensagem.");
+
+    }).finally(function(){
+
+        botao.disabled = false;
+        botao.innerHTML = "Enviar Mensagem";
+
+    });
+
+});
+
 
 let logado = false;
 
