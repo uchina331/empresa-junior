@@ -1435,7 +1435,14 @@ window.abrirImagem = abrirImagem;
 
 function atualizarLightbox(){
 
-document.getElementById("imagemLightbox").src=
+const img = document.getElementById("imagemLightbox");
+
+img.onload = () => {
+    img.style.opacity = "1";
+};
+
+img.style.opacity = "0";
+img.src = imagens[indiceAtual];
 
 imagens[indiceAtual];
 
