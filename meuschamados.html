@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meus Chamados | Empresa Júnior</title>
+
+
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+
+    background:#f4f6f9;
+    color:#333;
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+header{
+
+    background:#061b3a;
+    padding:20px 8%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:white;
+
+}
+
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+
+.logo img{
+
+    width:55px;
+    height:55px;
+    object-fit:contain;
+
+}
+
+
+.logo h1{
+
+    font-size:22px;
+
+}
+
+
+nav a{
+
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-weight:bold;
+
+}
+
+
+nav a:hover{
+
+    color:#d4af37;
+
+}
+
+
+
+/* =========================
+   BANNER
+========================= */
+
+
+.banner{
+
+    background:linear-gradient(
+        135deg,
+        #061b3a,
+        #0d3775
+    );
+
+    padding:70px 8%;
+    color:white;
+    text-align:center;
+
+}
+
+
+.banner h2{
+
+    font-size:38px;
+    margin-bottom:15px;
+
+}
+
+
+.banner p{
+
+    font-size:18px;
+    opacity:.9;
+
+}
+
+
+
+/* =========================
+   CONSULTA
+========================= */
+
+
+.container{
+
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
+
+}
+
+
+
+.consulta{
+
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 5px 20px #0002;
+
+}
+
+
+.consulta h2{
+
+    color:#061b3a;
+    margin-bottom:20px;
+
+}
+
+
+
+.formulario{
+
+    display:flex;
+    gap:15px;
+
+}
+
+
+.formulario input{
+
+    flex:1;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+
+}
+
+
+.formulario button{
+
+    background:#d4af37;
+    color:#061b3a;
+    border:none;
+    padding:15px 30px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+
+}
+
+
+.formulario button:hover{
+
+    background:#b99625;
+
+}
+
+
+
+/* =========================
+   RESULTADOS
+========================= */
+
+
+.resultados{
+
+    margin-top:35px;
+
+}
+
+
+
+.chamado{
+
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px #0002;
+
+}
+
+
+
+.chamado h3{
+
+    color:#061b3a;
+    margin-bottom:15px;
+
+}
+
+
+.info{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.info p{
+
+    font-size:15px;
+
+}
+
+
+
+/* STATUS */
+
+
+.status{
+
+    display:inline-block;
+    padding:7px 15px;
+    border-radius:20px;
+    font-weight:bold;
+
+}
+
+
+.pendente{
+
+    background:#fff3cd;
+    color:#856404;
+
+}
+
+
+.andamento{
+
+    background:#cfe2ff;
+    color:#084298;
+
+}
+
+
+.concluido{
+
+    background:#d1e7dd;
+    color:#0f5132;
+
+}
+
+
+
+.ver{
+
+    margin-top:20px;
+    background:#061b3a;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+
+
+.ver:hover{
+
+    background:#0d3775;
+
+}
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
+
+footer{
+
+    margin-top:60px;
+    background:#061b3a;
+    color:white;
+    text-align:center;
+    padding:25px;
+
+}
+
+
+
+/* RESPONSIVO */
+
+
+@media(max-width:700px){
+
+
+header{
+
+    flex-direction:column;
+    gap:20px;
+
+}
+
+
+nav a{
+
+    margin:10px;
+
+}
+
+
+.formulario{
+
+    flex-direction:column;
+
+}
+
+
+.info{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.banner h2{
+
+    font-size:28px;
+
+}
+
+
+}
+
+/* =========================
+   MODAL DETALHES
+========================= */
+
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:#0008;
+
+align-items:center;
+justify-content:center;
+
+z-index:999;
+
+
+}
+
+
+
+.modal-conteudo{
+
+
+background:white;
+
+width:90%;
+
+max-width:700px;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 10px 30px #0005;
+
+max-height:90vh;
+
+overflow:auto;
+
+
+}
+
+
+
+.modal-conteudo h2{
+
+
+color:#061b3a;
+
+margin-bottom:20px;
+
+
+}
+
+
+
+.fechar{
+
+
+float:right;
+
+font-size:25px;
+
+cursor:pointer;
+
+color:#777;
+
+
+}
+
+
+
+.fechar:hover{
+
+color:red;
+
+}
+
+
+
+.detalhe-item{
+
+
+margin-bottom:12px;
+
+font-size:16px;
+
+
+}
+
+
+
+.linha-tempo{
+
+
+margin-top:25px;
+
+border-left:4px solid #d4af37;
+
+padding-left:20px;
+
+
+}
+
+
+
+.etapa{
+
+
+margin-bottom:15px;
+
+}
+
+
+
+.etapa span{
+
+
+font-size:20px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+
+
+
+<h1>Empresa Júnior</h1>
+
+</div>
+
+
+<nav>
+
+
+
+<a href="contratar.html"> <-volta</a>
+
+
+
+
+</nav>
+
+
+</header>
+
+
+
+
+<section class="banner">
+
+
+<h2>📋 Meus Chamados</h2>
+
+<p>
+Acompanhe o andamento das suas solicitações
+</p>
+
+
+</section>
+
+
+
+
+
+<div class="container">
+
+
+<div class="consulta">
+
+
+<h2>
+🔍 Consultar chamados
+</h2>
+
+
+<p>
+Digite o e-mail utilizado na solicitação:
+</p>
+
+
+<br>
+
+
+<div class="formulario">
+
+
+<input 
+type="email"
+id="emailBusca"
+placeholder="Digite seu e-mail">
+
+
+<button onclick="consultarChamados()">
+
+Consultar
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="resultados" id="resultado">
+
+
+<!-- Chamados aparecerão aqui -->
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<!-- MODAL DETALHES -->
+
+
+<div class="modal" id="modalDetalhes">
+
+
+<div class="modal-conteudo">
+
+
+<span 
+class="fechar"
+onclick="fecharModal()">
+
+✖
+
+</span>
+
+
+
+<h2>
+📋 Detalhes do Chamado
+</h2>
+
+
+
+<div id="conteudoDetalhes">
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+<footer>
+
+<p>
+© 2026 Empresa Júnior - CETEP de Medeiros Neto
+</p>
+
+</footer>
+
+
+
+
+
+<script type="module">
+
+
+// ================================
+// FIREBASE CONFIGURAÇÃO
+// ================================
+
+
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import { 
+getFirestore,
+collection,
+query,
+where,
+getDocs 
+}
+from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+
+// ================================
+// CONFIG DO SEU FIREBASE
+// ================================
+
+
+const firebaseConfig = {
+
+
+apiKey: "SUA_API_KEY",
+
+authDomain: "empresa-junior-cetep.firebaseapp.com",
+
+projectId: "empresa-junior-cetep",
+
+storageBucket: "empresa-junior-cetep.firebasestorage.app",
+
+messagingSenderId: "SEU_MESSAGING_ID",
+
+appId: "SEU_APP_ID"
+
+
+};
+
+
+
+
+
+// Inicializar Firebase
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+let chamadosCache = {};
+
+
+
+
+
+// ================================
+// TESTE DE CONEXÃO
+// ================================
+
+
+console.log(
+"Firebase conectado no Meus Chamados"
+);
+
+
+
+
+
+// ================================
+// FUNÇÃO DO BOTÃO CONSULTAR
+// ================================
+
+
+window.consultarChamados = async function(){
+
+
+const email = document
+.getElementById("emailBusca")
+.value
+.trim()
+.toLowerCase();
+
+
+
+if(email === ""){
+
+
+alert("Digite seu e-mail.");
+
+return;
+
+
+}
+
+
+
+const areaResultado = document
+.getElementById("resultado");
+
+
+
+areaResultado.innerHTML = `
+
+<div class="chamado">
+
+<h3>
+🔎 Buscando chamados...
+</h3>
+
+</div>
+
+`;
+
+
+
+try{
+
+
+const chamadosRef = collection(
+db,
+"solicitacoes"
+);
+
+
+
+const consulta = query(
+
+chamadosRef,
+
+where(
+"email",
+"==",
+email
+)
+
+);
+
+
+
+const resultado = await getDocs(
+consulta
+);
+
+
+
+if(resultado.empty){
+
+
+areaResultado.innerHTML = `
+
+<div class="chamado">
+
+<h3>
+❌ Nenhum chamado encontrado
+</h3>
+
+
+<p>
+Não encontramos solicitações para esse e-mail.
+</p>
+
+
+</div>
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+
+areaResultado.innerHTML = "";
+
+
+
+resultado.forEach((doc)=>{
+
+
+const chamado = doc.data();
+
+chamadosCache[doc.id] = chamado;
+
+const statusAtual = chamado.status 
+? chamado.status.toLowerCase()
+: "pendente";
+
+
+
+let classeStatus = "pendente";
+
+let emojiStatus = "🟡";
+
+
+
+if(statusAtual.includes("andamento") 
+|| statusAtual.includes("atendimento")){
+
+
+classeStatus = "andamento";
+
+emojiStatus = "🔵";
+
+
+}
+
+
+
+if(statusAtual.includes("concluido")
+|| statusAtual.includes("solucionado")){
+
+
+classeStatus = "concluido";
+
+emojiStatus = "🟢";
+
+
+}
+
+
+
+areaResultado.innerHTML += `
+
+
+<div class="chamado">
+
+
+<h3>
+🏢 ${chamado.empresa || "Empresa não informada"}
+</h3>
+
+
+
+<div class="info">
+
+
+<p>
+<strong>📌 Protocolo:</strong>
+
+${chamado.protocolo || "Gerando..."}
+
+</p>
+
+
+
+<p>
+<strong>📄 Serviço:</strong>
+
+${chamado.servico || "Não informado"}
+
+</p>
+
+
+
+<p>
+<strong>📅 Data:</strong>
+
+${
+chamado.data
+?
+chamado.data.toDate()
+.toLocaleDateString("pt-BR")
+:
+"Sem data"
+}
+
+</p>
+
+
+
+<p>
+
+<strong>Status:</strong>
+
+<span class="status ${classeStatus}">
+
+${emojiStatus}
+
+${chamado.status || "Pendente"}
+
+</span>
+
+
+</p>
+
+
+</div>
+
+
+
+<hr style="
+margin:20px 0;
+border:none;
+border-top:1px solid #ddd;
+">
+
+
+
+<p>
+
+<strong>Descrição:</strong>
+
+<br>
+
+${chamado.descricao || "Sem descrição"}
+
+</p>
+
+
+
+<button 
+class="ver"
+onclick="verDetalhes('${doc.id}')">
+
+👁 Ver detalhes
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+});
+
+
+
+
+}
+catch(error){
+
+
+console.error(
+"Erro ao buscar chamados:",
+error
+);
+
+
+
+areaResultado.innerHTML = `
+
+<div class="chamado">
+
+<h3>
+⚠️ Erro ao consultar
+</h3>
+
+<p>
+${error.message}
+</p>
+
+
+</div>
+
+`;
+
+
+}
+
+
+
+}
+
+window.verDetalhes = function(id){
+
+
+
+const chamado = chamadosCache[id];
+
+
+
+if(!chamado){
+
+alert(
+"Chamado não encontrado"
+);
+
+return;
+
+}
+
+
+
+
+const detalhes = document
+.getElementById("conteudoDetalhes");
+
+
+
+detalhes.innerHTML = `
+
+
+
+<div class="detalhe-item">
+
+<strong>📌 Protocolo:</strong>
+
+${chamado.protocolo || "-"}
+
+</div>
+
+
+
+<div class="detalhe-item">
+
+<strong>🏢 Empresa:</strong>
+
+${chamado.empresa || "-"}
+
+</div>
+
+
+
+<div class="detalhe-item">
+
+<strong>👤 Responsável:</strong>
+
+${chamado.responsavel || "-"}
+
+</div>
+
+
+
+<div class="detalhe-item">
+
+<strong>📄 Serviço:</strong>
+
+${chamado.servico || "-"}
+
+</div>
+
+
+
+<div class="detalhe-item">
+
+<strong>⚠️ Prioridade:</strong>
+
+${chamado.prioridade || "Normal"}
+
+</div>
+
+
+
+<div class="detalhe-item">
+
+<strong>📌 Status:</strong>
+
+${chamado.status || "Pendente"}
+
+</div>
+
+
+
+<div class="detalhe-item">
+
+<strong>📝 Descrição:</strong>
+
+<br>
+
+${chamado.descricao || "-"}
+
+</div>
+
+
+
+
+<div class="detalhe-item">
+
+<strong>💬 Observações da Empresa Júnior:</strong>
+
+<br>
+
+${chamado.observacoes || 
+"Aguardando atualização"}
+
+</div>
+
+<div class="detalhe-item">
+
+
+<strong>
+📎 Arquivos enviados:
+</strong>
+
+
+<br>
+
+
+${mostrarArquivos(chamado.anexos)}
+
+
+</div>
+
+
+<div class="linha-tempo">
+
+
+<h3>
+📍 Linha do tempo
+</h3>
+
+
+${gerarLinhaTempo(chamado.status)}
+
+
+
+</div>
+
+
+
+`;
+
+
+
+
+document
+.getElementById("modalDetalhes")
+.style.display="flex";
+
+
+
+}
+
+
+
+
+
+
+window.fecharModal = function(){
+
+
+document
+.getElementById("modalDetalhes")
+.style.display="none";
+
+
+}
+
+function gerarLinhaTempo(status){
+
+
+status = status 
+? status.toLowerCase()
+: "pendente";
+
+
+
+let analise = "⚪";
+
+let andamento = "⚪";
+
+let concluido = "⚪";
+
+
+
+if(
+status.includes("analise") ||
+status.includes("análise")
+){
+
+analise="🟡";
+
+}
+
+
+
+if(
+status.includes("andamento") ||
+status.includes("atendimento")
+){
+
+analise="🟢";
+
+andamento="🟡";
+
+}
+
+
+
+if(
+status.includes("concluido") ||
+status.includes("concluído")
+){
+
+analise="🟢";
+
+andamento="🟢";
+
+concluido="🟢";
+
+}
+
+
+
+return `
+
+
+<div class="etapa">
+
+<span>🟢</span>
+
+Solicitação enviada
+
+</div>
+
+
+
+<div class="etapa">
+
+<span>${analise}</span>
+
+Em análise
+
+</div>
+
+
+
+
+<div class="etapa">
+
+<span>${andamento}</span>
+
+Em andamento
+
+</div>
+
+
+
+
+<div class="etapa">
+
+<span>${concluido}</span>
+
+Concluído
+
+</div>
+
+
+`;
+
+
+
+}
+
+function mostrarArquivos(anexos){
+
+
+
+if(!anexos || anexos.length === 0){
+
+return "Nenhum arquivo enviado.";
+
+}
+
+
+
+let lista="";
+
+
+
+anexos.forEach((arquivo)=>{
+
+
+lista += `
+
+
+<p>
+
+📄 
+
+<a 
+href="${arquivo.url}"
+target="_blank">
+
+${arquivo.nome || "Arquivo"}
+
+</a>
+
+
+</p>
+
+
+`;
+
+
+});
+
+
+
+return lista;
+
+
+}
+
+</script>
+
+
+</body>
+
+</html>

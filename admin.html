@@ -13,6 +13,80 @@
 
 <style>
 
+.cardsResumo{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+margin:30px 0;
+
+}
+
+.cardResumo{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.cardResumo h3{
+
+font-size:34px;
+
+color:#005bbb;
+
+margin-bottom:10px;
+
+}
+
+.tabelaSolicitacoes{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:white;
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.tabelaSolicitacoes th{
+
+background:#005bbb;
+
+color:white;
+
+padding:15px;
+
+}
+
+.tabelaSolicitacoes td{
+
+padding:15px;
+
+border-bottom:1px solid #eee;
+
+}
+
+.tabelaSolicitacoes tr:hover{
+
+background:#f7fbff;
+
+}
+
 *{
 margin:0;
 padding:0;
@@ -657,6 +731,11 @@ noticia.data?.toDate
 
 </button>
 
+<button id="menuSolicitacoes">
+
+📋 Solicitações
+
+</button>
 
 <button onclick="apagarNoticia('${documento.id}')">
 
@@ -729,6 +808,107 @@ carregarNoticias();
 
 }
 </script>
+
+<section id="paginaSolicitacoes" style="display:none;">
+
+<h2>
+
+📋 Solicitações de Serviços
+
+</h2>
+
+<div class="cardsResumo">
+
+<div class="cardResumo">
+
+<h3 id="totalSolicitacoes">
+
+0
+
+</h3>
+
+<p>Total</p>
+
+</div>
+
+<div class="cardResumo">
+
+<h3 id="pendentes">
+
+0
+
+</h3>
+
+<p>Pendentes</p>
+
+</div>
+
+<div class="cardResumo">
+
+<h3 id="andamento">
+
+0
+
+</h3>
+
+<p>Em andamento</p>
+
+</div>
+
+<div class="cardResumo">
+
+<h3 id="concluidas">
+
+0
+
+</h3>
+
+<p>Concluídas</p>
+
+</div>
+
+</div>
+
+<input
+
+id="pesquisaSolicitacao"
+
+placeholder="Pesquisar empresa ou protocolo..."
+
+style="width:100%;
+padding:15px;
+margin:30px 0;
+">
+
+<table class="tabelaSolicitacoes">
+
+<thead>
+
+<tr>
+
+<th>Protocolo</th>
+
+<th>Empresa</th>
+
+<th>Serviço</th>
+
+<th>Status</th>
+
+<th>Data</th>
+
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaSolicitacoes">
+
+</tbody>
+
+</table>
+
+</section>
 
 <div id="dashboardAdmin" style="display:none;">
 
