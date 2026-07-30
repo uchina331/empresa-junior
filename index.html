@@ -399,16 +399,121 @@ iframe{
 
 }
 
+#servicos{
+    padding:90px 8%;
+    background:#f4f7fb;
+}
+
+#servicos .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:35px;
+}
+
+.card-link{
+
+    text-align:center;
+
+    border-radius:20px;
+
+    padding:45px 30px;
+
+    transition:.35s;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+.card-link:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.icone{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.card-link h3{
+
+    color:#0d2a6d;
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+}
+
+.card-link p{
+
+    color:#666;
+
+    margin-bottom:30px;
+
+}
+
+.btn-card{
+
+    display:inline-block;
+
+    background:#0d2a6d;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px 35px;
+
+    border-radius:40px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.btn-card:hover{
+
+    background:#ffc72c;
+
+    color:#0d2a6d;
+
+    transform:scale(1.05);
+
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:32px;
+    font-weight:bold;
+    color:#FFD54F;
+}
+
+.logo-header{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div class="logo">
-Empresa Júnior
+    <img src="logo.png" alt="Logo Empresa Júnior" class="logo-header">
+    <span>Empresa Júnior</span>
 </div>
+
 
 <nav>
 
@@ -418,9 +523,7 @@ Empresa Júnior
 <a href="#servicos">Serviços</a>
 <a href="#equipe">Equipe</a>
 <a href="#contato">Contato</a>
-<a href="publicacoes.html">📰 Publicações</a>
-<a href="contratar.html">📰 contratar</a>
-
+<a href="#noticias">📰Noticia</a>
 </nav>
 
 </header>
@@ -432,7 +535,7 @@ Empresa Júnior
 <h1>Empresa Júnior</h1>
 
 <p>
-Desenvolvida pelos alunos do Curso Técnico em Administração do CETEP de Medeiros Neto, formando líderes e desenvolvendo soluções para a comunidade.
+Desenvolvida pelos alunos do Curso Técnico em Administração do CETEP de Medeiros Neto, com o objetivo de forma líderes e desenvolve soluções para as empresas.
 </p>
 
 <a href="#sobre" class="btn">Saiba Mais</a>
@@ -447,7 +550,7 @@ Desenvolvida pelos alunos do Curso Técnico em Administração do CETEP de Medei
 
 <div class="sobre">
 
-<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80">
+ <img src="logo.png">
 
 <div>
 
@@ -455,7 +558,7 @@ Desenvolvida pelos alunos do Curso Técnico em Administração do CETEP de Medei
 
 <p>
 
-A Empresa Júnior é uma organização formada pelos alunos do Curso Técnico em Administração do CETEP de Medeiros Neto, que desenvolvem projetos reais para empresas, promovendo aprendizado prático, inovação e crescimento profissional.
+A Empresa Júnior é uma organização que busca desenvolve projetos reais para empresas, promovendo aprendizado prático, inovação e crescimento profissional, além de ajudar as empresa a se organiza e ter uma boa administração.
 
 </p>
 
@@ -496,28 +599,78 @@ Missão • Visão • Valores
 
 <div class="cards">
 
-<div class="card">
-<h3>Consultoria Empresarial</h3>
-<p>Diagnóstico, planejamento e melhoria de processos.</p>
+    <div class="card">
+        <h3>Consultoria Empresarial</h3>
+        <p>Diagnóstico, planejamento e melhoria de processos.</p>
+    </div>
+
+    <div class="card">
+        <h3>Marketing Digital</h3>
+        <p>Redes sociais, identidade visual e estratégias digitais.</p>
+    </div>
+
+    <div class="card">
+        <h3>Soluções para Empresas</h3>
+        <p>Desenvolvemos soluções administrativas para empresas.</p>
+    </div>
+
+    <div class="card">
+        <h3>Gestão de Projetos</h3>
+        <p>Planejamento, execução e acompanhamento de projetos.</p>
+    </div>
+
 </div>
 
-<div class="card">
-<h3>Marketing Digital</h3>
-<p>Redes sociais, identidade visual e estratégias digitais.</p>
-</div>
+<div class="cta-servicos">
 
-<div class="card">
-<h3>Soluções para Empresas</h3>
-<p>Desenvolvemos soluções administrativas para MEIs, microempresas, empresas de pequeno e médio porte, auxiliando na organização, planejamento, gestão financeiras e crescimento sustentável.</p>
-</div>
+    <h2>Precisa de um atendimento personalizado?</h2>
 
+    <p>Solicite o seu serviço e faça um orçamento gratuito com nossa equipe.</p>
 
-<div class="card">
-<h3>Gestão de Projetos</h3>
-<p>Planejamento, execução e acompanhamento de projetos.</p>
-</div>
+    <a href="contratar.html" class="btn-contratar">
+        🤝 Contratar Serviços
+    </a>
 
 </div>
+
+</section>
+
+<section id="noticias">
+
+    <div class="noticias-box">
+
+        <div class="noticias-esquerda">
+
+            <span class="subtitulo">📰 NOTÍCIAS</span>
+
+            <h2>Notícias da Empresa Júnior</h2>
+
+            <p>
+                Fique por dentro de tudo o que acontece na Empresa Júnior.
+                Acompanhe nossos projetos, eventos, conquistas e novidades.
+            </p>
+
+            <ul>
+
+                <li>✔ Projetos desenvolvidos</li>
+
+                <li>✔ Eventos e palestras</li>
+
+                <li>✔ Novidades da equipe</li>
+
+                <li>✔ Conquistas e resultados</li>
+
+            </ul>
+
+            <a href="publicacoes.html" class="btn-publicacoes">
+                Ver Publicações →
+            </a>
+
+        </div>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -754,6 +907,187 @@ display:none;
 padding:16px;
 border-radius:50%;
 }
+
+}
+
+.cta-servicos{
+    text-align:center;
+    margin-top:60px;
+}
+
+.cta-servicos h2{
+    color:#0d2a6d;
+    margin-bottom:10px;
+}
+
+.cta-servicos p{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.btn-contratar{
+    display:inline-block;
+    padding:18px 40px;
+    background:#0d2a6d;
+    color:#fff;
+    text-decoration:none;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn-contratar:hover{
+    background:#f4b400;
+    color:#0d2a6d;
+    transform:translateY(-4px);
+}
+
+#noticias{
+
+    padding:90px 8%;
+
+    background:#f5f7fb;
+
+}
+
+.noticias-box{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+.noticias-esquerda{
+
+    padding:60px;
+
+    border-left:8px solid #f4b400;
+
+}
+
+.subtitulo{
+
+    color:#0b2d73;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+}
+
+.noticias-esquerda h2{
+
+    margin:15px 0;
+
+    font-size:40px;
+
+    color:#0b2d73;
+
+}
+
+.noticias-esquerda p{
+
+    color:#555;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+}
+
+.noticias-esquerda ul{
+
+    list-style:none;
+
+    padding:0;
+
+    margin-bottom:35px;
+
+}
+
+.noticias-esquerda li{
+
+    margin:15px 0;
+
+    font-size:18px;
+
+}
+
+.btn-publicacoes{
+
+    display:inline-block;
+
+    padding:16px 35px;
+
+    background:#0b2d73;
+
+    color:white;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.btn-publicacoes:hover{
+
+    background:#f4b400;
+
+    color:#0b2d73;
+
+}
+
+.noticias-direita{
+
+    background:#0b2d73;
+
+    color:white;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+    padding:40px;
+
+    align-content:center;
+
+}
+
+.numero{
+
+    text-align:center;
+
+}
+
+.numero h3{
+
+    font-size:38px;
+
+    color:#f4b400;
+
+    margin-bottom:5px;
+
+}
+
+.numero span{
+
+    font-size:16px;
 
 }
 
