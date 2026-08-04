@@ -518,6 +518,14 @@ font-size:20px;
     height:45px;
     object-fit:contain;
 }
+
+.formulario select{
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
 </style>
 
 </head>
@@ -587,33 +595,36 @@ Acompanhe o andamento das suas solicitações
 
 
 <p>
-Digite o e-mail utilizado na solicitação:
+Escolha como deseja consultar seu chamado:
 </p>
-
 
 <br>
 
-
 <div class="formulario">
 
+<select id="tipoBusca">
+    <option value="email">E-mail</option>
+    <option value="protocolo">Protocolo</option>
+</select>
 
-<input 
+<input
 type="email"
 id="emailBusca"
 placeholder="Digite seu e-mail">
 
+<input
+type="text"
+id="protocoloBusca"
+placeholder="Ex: EJ-2026-123456"
+style="display:none;">
 
 <button onclick="consultarChamados()">
-
 Consultar
-
 </button>
 
-
 </div>
 
 
-</div>
 
 
 
@@ -768,299 +779,146 @@ console.log(
 // ================================
 
 
-window.consultarChamados = async function(){
+const tipoBusca = document.getElementById("tipoBusca");
 
+tipoBusca.addEventListener("change", ()=>{
 
-const email = document
-.getElementById("emailBusca")
-.value
-.trim()
-.toLowerCase();
+    const email = document.getElementById("emailBusca");
+    const protocolo = document.getElementById("protocoloBusca");
 
+    if(tipoBusca.value==="email"){
 
+        email.style.display="block";
+        protocolo.style.display="none";
 
-if(email === ""){
+    }else{
 
+        email.style.display="none";
+        protocolo.style.display="block";
 
-alert("Digite seu e-mail.");
-
-return;
-
-
-}
-
-
-
-const areaResultado = document
-.getElementById("resultado");
-
-
-
-areaResultado.innerHTML = `
-
-<div class="chamado">
-
-<h3>
-🔎 Buscando chamados...
-</h3>
-
-</div>
-
-`;
-
-
-
-try{
-
-
-const chamadosRef = collection(
-db,
-"solicitacoes"
-);
-
-
-
-const consulta = query(
-
-chamadosRef,
-
-where(
-"email",
-"==",
-email
-)
-
-);
-
-
-
-const resultado = await getDocs(
-consulta
-);
-
-
-
-if(resultado.empty){
-
-
-areaResultado.innerHTML = `
-
-<div class="chamado">
-
-<h3>
-❌ Nenhum chamado encontrado
-</h3>
-
-
-<p>
-Não encontramos solicitações para esse e-mail.
-</p>
-
-
-</div>
-
-`;
-
-
-return;
-
-
-}
-
-
-
-
-
-areaResultado.innerHTML = "";
-
-
-
-resultado.forEach((doc)=>{
-
-
-const chamado = doc.data();
-
-chamadosCache[doc.id] = chamado;
-
-const statusAtual = chamado.status 
-? chamado.status.toLowerCase()
-: "pendente";
-
-
-
-let classeStatus = "pendente";
-
-let emojiStatus = "🟡";
-
-
-
-if(statusAtual.includes("andamento") 
-|| statusAtual.includes("atendimento")){
-
-
-classeStatus = "andamento";
-
-emojiStatus = "🔵";
-
-
-}
-
-
-
-if(statusAtual.includes("concluido")
-|| statusAtual.includes("solucionado")){
-
-
-classeStatus = "concluido";
-
-emojiStatus = "🟢";
-
-
-}
-
-
-
-areaResultado.innerHTML += `
-
-
-<div class="chamado">
-
-
-<h3>
-🏢 ${chamado.empresa || "Empresa não informada"}
-</h3>
-
-
-
-<div class="info">
-
-
-<p>
-<strong>📌 Protocolo:</strong>
-
-${chamado.protocolo || "Gerando..."}
-
-</p>
-
-
-
-<p>
-<strong>📄 Serviço:</strong>
-
-${chamado.servico || "Não informado"}
-
-</p>
-
-
-
-<p>
-<strong>📅 Data:</strong>
-
-${
-chamado.data
-?
-chamado.data.toDate()
-.toLocaleDateString("pt-BR")
-:
-"Sem data"
-}
-
-</p>
-
-
-
-<p>
-
-<strong>Status:</strong>
-
-<span class="status ${classeStatus}">
-
-${emojiStatus}
-
-${chamado.status || "Pendente"}
-
-</span>
-
-
-</p>
-
-
-</div>
-
-
-
-<hr style="
-margin:20px 0;
-border:none;
-border-top:1px solid #ddd;
-">
-
-
-
-<p>
-
-<strong>Descrição:</strong>
-
-<br>
-
-${chamado.descricao || "Sem descrição"}
-
-</p>
-
-
-
-<button 
-class="ver"
-onclick="verDetalhes('${doc.id}')">
-
-👁 Ver detalhes
-
-</button>
-
-
-
-</div>
-
-
-`;
+    }
 
 });
 
+window.consultarChamados = async function(){
 
+    const areaResultado = document.getElementById("resultado");
+    areaResultado.innerHTML = "";
 
+    chamadosCache = {};
 
-}
-catch(error){
+    const tipo = document.getElementById("tipoBusca").value;
 
+    let consulta;
 
-console.error(
-"Erro ao buscar chamados:",
-error
-);
+    if(tipo==="email"){
 
+        const email = document.getElementById("emailBusca")
+        .value.trim().toLowerCase();
 
+        if(email===""){
+            alert("Digite seu e-mail.");
+            return;
+        }
 
-areaResultado.innerHTML = `
+        consulta = query(
+            collection(db,"solicitacoes"),
+            where("email","==",email)
+        );
 
-<div class="chamado">
+    }else{
 
-<h3>
-⚠️ Erro ao consultar
-</h3>
+        const protocolo = document.getElementById("protocoloBusca")
+        .value.trim();
 
-<p>
-${error.message}
-</p>
+        if(protocolo===""){
+            alert("Digite o protocolo.");
+            return;
+        }
 
+        consulta = query(
+            collection(db,"solicitacoes"),
+            where("protocolo","==",protocolo)
+        );
 
-</div>
+    }
 
-`;
+    try{
 
+        const resultado = await getDocs(consulta);
 
-}
+        if(resultado.empty){
 
+            areaResultado.innerHTML = `
+                <p style="text-align:center;">
+                    Nenhum chamado encontrado.
+                </p>
+            `;
 
+            return;
+
+        }
+
+        resultado.forEach((doc)=>{
+
+            const chamado = doc.data();
+
+            chamadosCache[doc.id] = chamado;
+
+            let classeStatus = "pendente";
+
+            if((chamado.status || "").toLowerCase().includes("andamento"))
+                classeStatus = "andamento";
+
+            if((chamado.status || "").toLowerCase().includes("concluido") ||
+               (chamado.status || "").toLowerCase().includes("concluído"))
+                classeStatus = "concluido";
+
+            areaResultado.innerHTML += `
+
+            <div class="chamado">
+
+                <h3>${chamado.empresa || "-"}</h3>
+
+                <div class="info">
+
+                    <p><strong>Protocolo:</strong> ${chamado.protocolo || "-"}</p>
+
+                    <p><strong>Serviço:</strong> ${chamado.servico || "-"}</p>
+
+                    <p><strong>Responsável:</strong> ${chamado.responsavel || "-"}</p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="status ${classeStatus}">
+                            ${chamado.status || "Pendente"}
+                        </span>
+                    </p>
+
+                </div>
+
+                <button class="ver"
+                    onclick="verDetalhes('${doc.id}')">
+                    Ver detalhes
+                </button>
+
+            </div>
+
+            `;
+
+        });
+
+    }catch(error){
+
+        console.error(error);
+
+        areaResultado.innerHTML = `
+            <p style="color:red;text-align:center;">
+                Erro ao consultar os chamados.
+            </p>
+        `;
+
+    }
 
 }
 
